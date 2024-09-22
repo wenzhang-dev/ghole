@@ -2,7 +2,6 @@ package stun
 
 import (
 	"errors"
-	"fmt"
 	"net"
 )
 
@@ -15,7 +14,6 @@ import (
 func test1(
     c *Client, dst net.Addr,
 ) (mapped *net.UDPAddr, changed *net.UDPAddr, err error) {
-    fmt.Println("send test1")
     msg, err := sendBindingRequest(c, dst, false, false)
     if err != nil {
         return nil, nil, err
@@ -51,7 +49,6 @@ func test1(
 // "change IP" and "change port" flags from the CHANGE-REQUEST
 // attribute set.
 func test2(c *Client, dst net.Addr) (mapped *net.UDPAddr, err error) {
-    fmt.Println("send test2")
     msg, err := sendBindingRequest(c, dst, true, true)
     if err != nil {
         return nil, err
@@ -76,7 +73,6 @@ func test2(c *Client, dst net.Addr) (mapped *net.UDPAddr, err error) {
 // In test III, the client sends a Binding Request with only
 // the "change port" flag set.
 func test3(c *Client, dst net.Addr) (mapped *net.UDPAddr, err error) {
-    fmt.Println("send test3")
     msg, err := sendBindingRequest(c, dst, false, true)
     if err != nil {
         return nil, err

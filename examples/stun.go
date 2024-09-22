@@ -1,9 +1,9 @@
 package main
 
 import (
-    "os"
 	"flag"
 	"fmt"
+	"os"
 
 	"github.com/wenzhang-dev/ghole/stun"
 )
@@ -18,12 +18,13 @@ func main() {
     flag.Parse()
 
     if localAddr == "" {
-        localAddr = ":18080"
+        // use 0 to pick a random port
+        localAddr = ":0"
     }
 
     if serverAddr == "" {
-        fmt.Printf("Usage: %s -local :18080 -server 112.112.112.112:6999\n", os.Args[0])
-        os.Exit(1)
+        // use the default stun server
+        serverAddr = "stun.qwq.pink:3478"
     }
 
     cli, err := stun.NewClient(serverAddr, localAddr)

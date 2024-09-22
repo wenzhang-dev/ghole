@@ -103,15 +103,12 @@ func (attr *Attribute) encode() []byte {
 }
 
 func parseAttribute(buf []byte) (*Attribute, error) {
-    fmt.Printf("buf: %x\n", buf)
     if len(buf) < AttributeHeaderSize {
         return nil, errInvalidAttribute
     }
 
     typ := binary.BigEndian.Uint16(buf[:2])
     length := binary.BigEndian.Uint16(buf[2:4])
-
-    fmt.Printf("type: %d, length: %d\n", typ, length)
 
     offset := length + AttributeHeaderSize
     if offset > math.MaxUint16 || offset % 4 != 0 {
